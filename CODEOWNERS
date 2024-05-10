@@ -1,0 +1,16 @@
+[Deploy]
+chart/                  @theophanevie @BfoR @Idotno @HiiroSakaki
+config/kube.py          @theophanevie @BfoR @Idotno @HiiroSakaki
+dockerfiles/            @theophanevie @BfoR @Idotno @HiiroSakaki
+manage.py               @theophanevie @BfoR @Idotno @HiiroSakaki
+config/asgi.py          @theophanevie @BfoR @Idotno @HiiroSakaki
+config/wsgi.py          @theophanevie @BfoR @Idotno @HiiroSakaki
+make_setup.py           @theophanevie @BfoR @Idotno @HiiroSakaki
+run_migrations.sh       @theophanevie @BfoR @Idotno @HiiroSakaki
+.gitlab-ci.yml          @theophanevie @BfoR @Idotno @HiiroSakaki
+
+[Requirements]
+pyproject.toml          @theophanevie @BfoR @Idotno @HiiroSakaki
+
+[Codeowners]
+CODEOWNERS              @theophanevie @BfoR @Idotno

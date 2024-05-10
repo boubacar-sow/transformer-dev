@@ -1,0 +1,134 @@
+[tool.poetry]
+name = "transformer"
+version = "0.1.0"
+description = ""
+authors = ["DGEX Solutions <contact@dgexsol.fr>"]
+
+[tool.poetry.dependencies]
+# base
+python = "^3.11"
+numpy = "^1.21.4"
+pandas = "^1.3.4"
+zstandard = "^0.21.0"
+omegaconf = "^2.3.0"
+psutil = "^5.9.6"
+pytz = "^2023.3.post1"
+boto3 = "^1.28.72"     # Used to access S3
+
+lightflow = "2.1.1"
+
+# # Machine learning dependencies
+# torch = { version = "^2.1.0", source = "torch-cpu" }
+# mlflow = { version = "^2.9.0" }
+# lightning = { version = "^2.1.0" }
+optuna = "^3.6.0"
+optuna-integration = "^3.6.0"
+
+# Embeddings dependencies
+geomet = "^1.0.0"
+pyproj = "^3.6.1"
+networkx = ">=2.8.8"
+node2vec = "0.4.6"
+scipy = "<1.13.0" # used here only to fix a problem with a node2vec dependency, gensim, which uses scipy.linalg.triu (removed in scipy 1.13.0)
+circulation-numerotation = "0.1.7"
+railway-utils = "0.3.1"
+shapely = "^2.0.3"
+
+[tool.poetry.group.dev.dependencies]
+# Formatting and typing
+ruff = "^0.3.0"
+mypy = "^1.2"
+
+# Tests
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+pytest-env = "^1.1.1"
+pytest-xdist = "^3.3.1"
+coverage = "^6.4"
+pre-commit = "^2.15.0"
+
+# Other
+matplotlib = "^3.8.0"
+unidecode = "^1.3.7"
+imageio = "^2.31.6"
+ipython = "^8.16.1"
+ipykernel = "^6.28.0"
+boto3-stubs = "^1.34.19"
+
+
+[[tool.poetry.source]]
+name = "osrdata-pypi"
+url = "https://gitlab.com/api/v4/groups/8419749/-/packages/pypi/simple"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "torch-cpu"
+url = "http://download.pytorch.org/whl/cpu/"
+priority = "explicit"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "pypi-public"
+url = "https://pypi.org/simple/"
+priority = "primary"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-v -s --basetemp=/tmp/pytest --ignore data_local_folder"
+python_files = ["transformer/tests/*.py"]
+junit_family = "xunit2"
+filterwarnings = ["ignore::PendingDeprecationWarning"]
+env = ["TRANSFORMER_ENV=test"]
+
+[tool.coverage.run]
+omit = [
+    ".*",
+    "*/*-packages/*",
+    "venv/*",
+    "manage.py",
+    "*/migrations/*",
+    "*/config/*",
+    "*/tests/*",
+    "*/conftest.py",
+    "*/apps.py",
+    "data_local_folder/*",
+    "transformer/outputs/post_processing/*",
+]
+
+[tool.coverage.report]
+fail_under = 0 # Since the legacy base code has no tests, we set the coverage rate to zero
+
+[tool.mypy]
+exclude = [
+    "venv",
+    "data_local_folder",
+    "^[0-9]*$",                            # local pytorch-lightning runs produce logs folders
+    "transformer/outputs/post_processing",
+    ".mypy_cache",
+]
+plugins = "numpy.typing.mypy_plugin"
+strict = true
+
+[tool.ruff]
+line-length = 120
+lint.ignore = ["F503", "E203"]
+lint.extend-select = [
+    "E", # pycodestyle
+    "W", # pycodestyle
+    "I", # isort
+    "C", # complex-structure
+]
+exclude = [
+    "venv",
+    "data_local_folder",
+    "^[0-9]*$",                            # local pytorch-lightning runs produce logs folders
+    "*.ipynb",
+    "transformer/outputs/post_processing",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

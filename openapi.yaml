@@ -1,0 +1,17 @@
+openapi: 3.1.0
+info:
+  title: transformer
+  description: transformer
+  version: 0.1.0
+
+paths:
+  /ping/:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
