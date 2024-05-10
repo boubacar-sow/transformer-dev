@@ -1,0 +1,28 @@
+arrondis_use_for_transl: true
+arrondis_use_for_preds: true
+arrondis_shift: 0.5
+arrondis_step: 1
+
+forget_negative_truths: true
+
+unseen_trains_forget_negative_transl: false
+unseen_trains_shift_negative_transl: false # true
+unseen_trains_forget_negative_preds: false # true
+unseen_trains_shift_negative_preds: false
+
+upper_bound_translation_use_affine: false
+upper_bound_translation_slope: 0.16666 # in minutes per minutes (10 min/hour)
+upper_bound_translation_offset: 5
+
+# upper_bound_translation_use_affine: false
+# upper_bound_translation_slope: 0/60 # in minutes per minutes
+# upper_bound_translation_offset: 30
+
+lower_bound_translation_use_affine: false
+lower_bound_translation_slope: -0.16666 # in minutes per minutes (10 min/hour)
+lower_bound_translation_offset: -5
+
+smoother_use_simple: false
+smoother_decay_coeff: 0.7 # 0.7 means the coeff of the last prediction is 0.7
+smoother_use_conditionnal_simple: false
+smoother_conditionnal_threshold: 3.

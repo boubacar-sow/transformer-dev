@@ -1,0 +1,59 @@
+download_data_from_s3: false # if true, all training data (snapshots, stats, embeddings, will be downloaded from s3
+save_results_to_s3: false # if true, the statistics and the embeddings will be saved to S3
+local_folder: data_local_folder # the data is stored or downloaded into local_folder/bucket_name
+bucket_name: local-bucket
+aws_profile: utnm # --profile argument in aws CLI
+
+version: v22_replay
+
+data_loader_device: cpu
+
+zst_compression_level: 3 # default zstandard compression level
+
+use_cached_pr_data_for_K_days: 30 # don't re-download and recompute the PRs graph if the PRs data was obtained less that K days ago
+
+# define the training and testing periods
+# the min/max limits work like arrays: min=a and max=b gives the days from a to b-1
+days:
+  min_train: 2022-01-01
+  max_train: 2022-01-02
+  min_test: 2022-01-02
+  max_test: 2022-01-03
+
+filters:
+  train_num_filter: all # see inputs/utils/train_num_filters.py/TRAIN_NUM_FILTERS
+  sillon_filter: all # see inputs/utils/sillons_filters.py/SILLON_FILTERS
+  global_sillon_tagger: all # see inputs/utils/sillons_taggers.py/SILLON_TAGGERS
+  diff_delay_sillon_tagger: train_type # same here
+  pr_filter: all # currently unused
+
+# Transformations/normalizations applied to inputs and outputs of the neural network
+preprocessing:
+  remove_translation_in_outputs: true # the value to predict is [actual delay] - [delay predicted by translation]
+  transform_delay_sqrt: true # true or "sqrt" -> square root transform, "log" -> logarithm transform, false -> no transform
+  normalize_delay: true
+  transform_times_sqrt: true # true or "sqrt" -> square root transform, "log" -> logarithm transform, true -> no transform
+  normalize_embeddings: true # if true, each embedding type will be centered and rescaled
+  normalize_times: true
+  normalize_all_inputs: false # normalize all transformer inputs except the embeddings
+  normalize_non_eigen_inputs: false # normalize inputs that are the same for all the trains (week, day, hour, nbr of trains)
+
+# Parameters for the snapshot files used in the train/test sets
+snapshots:
+  train_nbr_minutes_interval: 8
+  train_start_minute: 0 # start at midnight
+  train_end_minute: 1440 # 1440 = 24*60 end at midnight (day after)
+  train_min_train_num_nbr: 0 # int(len(days_train)/100*15) # minapp: 150
+  validation_set_proportion: 0.05 # proportion of the training snapshots used for validation
+  test_nbr_minutes_interval: 8
+  test_start_minute: 0
+  test_end_minute: 1440 # 1440 = 24*60
+  test_min_train_num_nbr: 0 # int(len(days_train)/100*15) # 1
+
+# Additional parameters to compute statistics on the train set
+stats:
+  use_local_diff_delay: false # option used in snapshots stats computation (see MeanStd)
+  nbr_days_interval: 8 # only use one day every X days
+  nbr_minutes_interval: 64 # only use one (random) snapshot in every X minutes interval
+  bin_size: 0.1 # in some stats, the values are rounded up to precision bin_size
+  max_sillons_for_missing_prs: 20 # impute embeddings of missing PRs based on their location in sillons

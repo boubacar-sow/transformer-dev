@@ -1,0 +1,13 @@
+download_data_from_s3: true
+save_results_to_s3: true
+local_folder: /data # the data is stored or downloaded into local_folder/bucket_name
+aws_profile: ""
+
+days:
+  min_train: 2022-01-01
+  max_train: 2022-01-02
+  min_test: 2022-01-02
+  max_test: 2022-01-03
+
+snapshots:
+  validation_set_proportion: 0.5

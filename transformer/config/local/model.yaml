@@ -1,0 +1,24 @@
+use_inputs:
+  train_type: true
+  nbr_train_now: true
+  year_day: true # day in the current year
+  year_day_dim: 3 # only used if year_day is true
+  week_day: true # day in the current week
+  current_time: true # time in seconds
+  diff_delay: false # diff_delay and middle_diff_delay are mutually exclusive
+  middle_diff_delay: false
+  middle_diff_delay_bounds: [0.25, 0.75]
+  train_nextdesserte_embedding: false
+  pr_nextdesserte_embedding: false
+  lignepk_embedding: false
+  laplacian_embedding: false
+  node2vec_embedding: false
+  geographic_embedding: true
+  random_embedding: false
+
+depth: 2 # attention layers
+nhead: 2 # attention heads
+model_dim: 8 #TODO were intermediate values less efficient ?
+# each sillon contains the current pr of each train, as well as some infos on the previous and next prs on its itinerary
+n_prev: 10 # number of prs before the snapshot time
+n_foll: 40 # number of prs after the snapshot time

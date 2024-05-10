@@ -1,0 +1,7 @@
+snapshots:
+  train_nbr_minutes_interval: 8
+  test_nbr_minutes_interval: 16
+  train_start_minute: 800
+  train_end_minute: 1200
+  test_start_minute: 800
+  test_end_minute: 1000

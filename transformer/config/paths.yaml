@@ -1,0 +1,74 @@
+# Contains all data files paths
+
+# Naming convention :
+#  -> regular string : x/y/z.ext
+# _f -> f-string template :  x/y/z_{}.ext -> to be filled with str.format
+
+# Some string include info of the form ${config:config.parameter}
+# These are Python template strings, to be filled with the other config parameters, e.g. config:model.depth
+
+# +----------------+
+# | Root directory |
+# +----------------+
+
+base_directory: ${config:data.local_folder}/${config:data.bucket_name}/training_data
+
+# +---------------------+
+# | Points Remarquables |
+# +---------------------+
+
+# PRs list and basic information (ID Gaia, code CICH, geographic coordinates, etc)
+pr_data: ${base_directory}/PRs_data
+points_remarquables: ${pr_data}/points_remarquables.csv
+pr_infos_cache: ${pr_data}/pr_infos_cache.pickle
+pr_metadata: ${pr_data}/metadata.json
+
+# PRs graph, used for embeddings
+PRs_graph: ${pr_data}/PRs_graph
+PRs_graph_nodes: ${PRs_graph}/nodes.geojson # raw cassini data
+PRs_graph_edges: ${PRs_graph}/edges.geojson # raw cassini data
+PRs_graph_networkx: ${PRs_graph}/PRs_graph_networkx.pickle # graph created from cassini data
+PRs_doublons: ${PRs_graph}/PRs_doublons.json # list of PRs present twice in the graph
+connected_PRs_graph_figure: ${PRs_graph}/connected_PRs_graph.jpg
+PRs_graph_figure_f: ${PRs_graph}/PRs_graph_{}.jpg
+
+# +----------------+
+# | Snapshots data |
+# +----------------+
+
+snapshots: ${base_directory}/snapshots # Main directory
+snapshots_per_version: ${snapshots}/${config:data.version} # Version-specific folder
+snapshot_f: ${snapshots_per_version}/{}/{}.json.zstd
+
+# +-------------------------+
+# | Statistics on snapshots |
+# +-------------------------+
+
+snapshots_stats: ${base_directory}/snapshots_stats
+snapshots_stats_folder_f: ${snapshots_stats}/{}
+config_statistics_f: ${snapshots_stats}/{}/config.json
+global_statistics_f: ${snapshots_stats}/{}/global_statistics.pickle.zst
+inter_pr_statistics_f: ${snapshots_stats}/{}/inter_pr_statistics.pickle.zst
+missing_PRs_neighbors_f: ${snapshots_stats}/{}/missing_PRs_neighbors.json
+
+# +------------------------+
+# | Training related files |
+# +------------------------+
+
+logs_dir: ${base_directory}/logs
+logs_file: ${logs_dir}/logs.txt
+logs_profiling: ${logs_dir}/profiling
+warm_start: ${base_directory}/warm_start # Local folder where MLFLow runs will be downloaded for warm start
+optuna_storage: ${base_directory}/optuna_storage
+optuna_db: sqlite:///${optuna_storage}/db.sqlite3
+
+# +--------------------------+
+# | Embeddings related files |
+# +--------------------------+
+
+embeddings: ${base_directory}/embeddings
+embedding_folder_f: ${embeddings}/{}
+embedding_weights_f: ${embeddings}/{}/embedding.pickle
+embedding_config_f: ${embeddings}/{}/config.json
+embedding_key_to_emb_f: ${embeddings}/{}/key_to_emb.json # embeddings are obtained as emb[key_to_emb[key]]
+embedding_figures_f: ${embeddings}/{}/figures/{}.jpg # {embedding hash}, {figure name}

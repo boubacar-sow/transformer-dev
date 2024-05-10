@@ -1,0 +1,32 @@
+laplacian_embedding:
+  dim: 5
+  version: CLASSIC #TRANSITION or GENERAL_EIGENVALUE or CLASSIC_RESCALED or CLASSIC # basically which eigenproblem to solve to obtain the embedding
+  use_weights: false
+
+node2vec_embedding:
+  dim: 20
+  walk_length: 80
+  num_walks: 10
+  q: 0.5
+  p: 4
+  window: 20
+  seed: 1998
+
+nextdesserte_embedding:
+  n_iter: 2000
+  saving_frequency: 200
+  log_frequency: 20
+  min_date: 2018-01-01
+  max_date: 2018-01-02
+  min_test_date: 2018-02-01
+  max_test_date: 2018-02-02
+
+lignepk_embedding:
+  threshold1: 100 # take all inter_pr with more than threshold1 nbr of passages
+  threshold2: 10 # take inter_pr only if it helps connect the graph and nbr > threshold2
+  pool: 2
+  n_iter: 20
+  min_date: 2018-01-01
+  max_date: 2018-02-01
+  min_test_date: 2018-02-01
+  max_test_date: 2018-02-02

@@ -1,0 +1,4 @@
+batch_size: 2
+nbr_epoch: 4
+batches_per_epoch: 4
+loss: smooth_l1

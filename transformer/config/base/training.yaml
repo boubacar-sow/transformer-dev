@@ -1,0 +1,36 @@
+logging: INFO # must be DEBUG, INFO, WARNING or ERROR
+
+data_loader_num_workers: 2
+
+mlflow:
+  tracking_uri: http://gateway.dev.dgexsol.fr/mlflow/
+  use_mlflow: true
+  log_model: true
+
+# Only used for hyperparameter tuning
+optuna:
+  n_trials: 0
+
+# if true, the statistics and/or the embeddings will be recomputed at each execution even with unchanged settings
+use_precomputed:
+  statistics: true
+  embeddings: true
+
+# Hyperparameters
+random_seed: 0
+dropout: 0.1 # dropout for the neural network
+batch_size: 4
+learning_rate: 5e-5
+loss: smooth_l1 # see transformer/training/metrics/losses/LOSSES
+use_scheduler: true # use a learning rate scheduler in training
+nbr_epoch: 40
+batches_per_epoch: 200
+
+postprocessing_forget_negative_preds: false # if true, ensures that the predictions are after the prediction date
+
+test_step:
+  skip: false # if true, skip the test step
+  delay_bins: [0, 10, 20, 30]
+  horizon_bins: [0, 10, 20, 30]
+  train_num_filters: [all] # will be applied on top of cfg.data.filters.train_num_filter (see inputs/utils/train_num_filters.py/TRAIN_NUM_FILTERS)
+  metrics: [mae, mse] # see outputs/base_metrics.py/BASE_METRICS

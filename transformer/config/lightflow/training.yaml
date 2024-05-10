@@ -1,0 +1,13 @@
+data_loader_num_workers: 3
+
+nbr_epoch: 2
+
+mlflow:
+  log_model: true
+
+batches_per_epoch: 4
+
+test_step:
+  skip: false
+
+batch_size: 2

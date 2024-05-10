@@ -1,0 +1,62 @@
+save_training_data: false
+
+random_embedding:
+  dim: 20
+  standard_deviation: 1 # of the centered gaussian distribution used to generate a random embedding
+  seed: 1998 # seed for random generation of embedding
+
+geographic_embedding:
+  dim: 2
+
+node2vec_embedding:
+  dim: 20
+  walk_length: 80
+  num_walks: 10
+  q: 0.5
+  p: 4
+  window: 20
+  seed: 1998
+
+laplacian_embedding:
+  dim: 20
+  version: CLASSIC_RESCALED #TRANSITION or GENERAL_EIGENVALUE or CLASSIC_RESCALED or CLASSIC # basically which eigenproblem to solve to obtain the embedding
+  use_weights: false
+
+nextdesserte_embedding:
+  train_dim: 16 # dimension of final train embedding
+  pr_dim: 12 # dimension of pr embedding
+  n_iter: 10000
+  min_train_num_nbr: 2 # 0.08 # 5 # Min nbr/percent of sillons of each train_num, 1=All (0 TODO)
+  min_pr_nbr_passages: 0 # TODO ?
+  model_dim: 64 # dimension of hidden layer of the neural network used to create embedding
+  batch_size: 512
+  saving_frequency: 1000
+  log_frequency: 1000
+
+  # prop_norm, prop_skip and prop_dskip should sum to 1.
+  prop_norm: 0.85
+  prop_skip: 0.1
+  prop_dskip: 0.05
+
+  mask_prop: 0.2
+
+  min_date: 2018-01-01
+  max_date: 2020-09-01
+  min_test_date: 2020-09-01
+  max_test_date: 2020-11-18
+
+lignepk_embedding:
+  ligne_dim: 8 # dimension of the embedding for each ligne
+  n_iter: 150
+  min_train_num_nbr: 2 # 0.08 # 5 # Min nbr/percent of sillons of each train_num, 1=All (0 TODO)
+  model_dim: 64 # hidden dimension of the hidden layer in the model
+  batch_size: 512 # batch size for training
+  seed: 1998 # seed for batch making
+  threshold1: 200 # take all inter_pr with more than THRESHOLD1 nbr of passages
+  threshold2: 10 # take inter_pr only if it helps connect the graph and nbr > THRESHOLD2
+  pool: 11
+
+  min_date: 2018-01-01
+  max_date: 2020-09-01
+  min_test_date: 2020-09-01
+  max_test_date: 2020-11-18

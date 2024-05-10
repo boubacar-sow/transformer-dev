@@ -1,0 +1,17 @@
+use_inputs:
+  train_type: true
+  nbr_train_now: true
+  week_day: true
+  current_time: true
+  diff_delay: true # exceptionally enable both diff_delay and middle_diff_delay for test purposes
+  middle_diff_delay: true
+  middle_diff_delay_bounds: [0.25, 0.75]
+  train_nextdesserte_embedding: true
+  pr_nextdesserte_embedding: true
+  lignepk_embedding: true
+  laplacian_embedding: true
+  node2vec_embedding: true
+  geographic_embedding: true
+  random_embedding: true
+
+model_dim: 8

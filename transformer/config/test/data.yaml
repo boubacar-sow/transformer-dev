@@ -1,0 +1,7 @@
+bucket_name: test-bucket
+
+days:
+  min_train: 2023-11-17
+  max_train: 2023-11-18
+  min_test: 2023-11-18
+  max_test: 2023-11-19

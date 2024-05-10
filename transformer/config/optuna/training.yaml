@@ -1,0 +1,7 @@
+mlflow:
+  log_model: false
+
+data_loader_num_workers: 3
+
+optuna:
+  n_trials: 5

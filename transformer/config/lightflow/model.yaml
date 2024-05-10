@@ -1,0 +1,15 @@
+use_inputs:
+  train_nextdesserte_embedding: false
+  pr_nextdesserte_embedding: false
+  lignepk_embedding: false
+  laplacian_embedding: false
+  node2vec_embedding: false
+  geographic_embedding: true
+  random_embedding: false
+
+depth: 2 # attention layers
+nhead: 2 # attention heads
+model_dim: 8
+# each sillon contains the current pr of each train, as well as some infos on the previous and next prs on its itinerary
+n_prev: 10 # number of prs before the snapshot time
+n_foll: 40 # number of prs after the snapshot time

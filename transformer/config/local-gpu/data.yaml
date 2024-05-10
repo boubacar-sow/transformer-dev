@@ -1,0 +1,12 @@
+bucket_name: pdi-re-transformer
+download_data_from_s3: true
+save_results_to_s3: true
+
+days:
+  min_train: 2022-01-01
+  max_train: 2023-12-01
+  min_test: 2023-12-01
+  max_test: 2024-01-01
+
+snapshots:
+  validation_set_proportion: 0.0125
