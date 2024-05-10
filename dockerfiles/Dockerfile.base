@@ -1,0 +1,27 @@
+# vim: ft=dockerfile
+
+FROM registry.gitlab.com/osrdata/infra/docker-images/gpu-based:tmp_01b7b2125609
+
+# Install AWS CLI to download the training data with aws s3 cp
+# TODO: Must be in an init container
+RUN apt-get update && apt-get install -y curl zip && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN python3.11 -m pip install --no-cache-dir poetry==1.5.1
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off
+
+COPY poetry.lock pyproject.toml /home/service/
+
+ARG PYPI_TOKEN_NAME
+ARG PYPI_TOKEN_PASSWORD
+RUN poetry config virtualenvs.create false && \
+    poetry config http-basic.osrdata-pypi ${PYPI_TOKEN_NAME} ${PYPI_TOKEN_PASSWORD} && \
+    poetry install --no-interaction --no-ansi --no-root --without dev
+
+USER service
