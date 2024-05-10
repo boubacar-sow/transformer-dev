@@ -1,0 +1,216 @@
+[
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 0,
+            "kind": "pr",
+            "code_CI": "286039",
+            "code_CH": "C1",
+            "libelle": "Lille-St-Sauveur",
+            "gaia_id": "002b803c-d4d0-11eb-80ff-01f06fb51c27",
+            "pk": "3+011",
+            "ligne": "266300"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.1101520437418415,
+                    50.62164068463694
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 10695,
+            "kind": "pr",
+            "code_CI": "286831",
+            "code_CH": "00",
+            "libelle": "Pont-de-Bois",
+            "gaia_id": "d9795300-6667-11e3-89ff-01f464e0362d",
+            "pk": "5+100",
+            "ligne": "269000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.1297486840982414,
+                    50.62397282949046
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 3849,
+            "kind": "ndl",
+            "gaia_id": "46e5d9ca-6665-11e3-afff-01f464e0362d",
+            "pk": "3+807",
+            "ligne": "269000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.112484059,
+                    50.622329065
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 3851,
+            "kind": "ndl",
+            "gaia_id": "46e5dbe0-6665-11e3-afff-01f464e0362d",
+            "pk": "264+733",
+            "ligne": "268000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.163862743,
+                    50.621690853
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 22925,
+            "kind": "pr",
+            "code_CI": "286039",
+            "code_CH": "BA",
+            "libelle": "Lille-St-Sauveur",
+            "gaia_id": "d9b28642-6667-11e3-89ff-01f464e0362d",
+            "pk": "3+807",
+            "ligne": "269000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.112484059,
+                    50.622329065
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 32434,
+            "kind": "pr",
+            "code_CI": "286856",
+            "code_CH": "00",
+            "libelle": "Annappes",
+            "gaia_id": "d9dba7ae-6667-11e3-89ff-01f464e0362d",
+            "pk": "6+300",
+            "ligne": "269000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.146351026,
+                    50.622876233
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 20564,
+            "kind": "pr",
+            "code_CI": "286039",
+            "code_CH": "C2",
+            "libelle": "Lille-St-Sauveur",
+            "gaia_id": "d9a81ad0-6667-11e3-89ff-01f464e0362d",
+            "pk": "1+514",
+            "ligne": "266300"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.1005616422507205,
+                    50.60943211638777
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 9076,
+            "kind": "pr",
+            "code_CI": "286039",
+            "code_CH": "EP",
+            "libelle": "Lille-St-Sauveur",
+            "gaia_id": "d96f3a4c-6667-11e3-89ff-01f464e0362d",
+            "pk": "3+960",
+            "ligne": "269000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.1145129206641538,
+                    50.622616533694554
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 23766,
+            "kind": "pr",
+            "code_CI": "286062",
+            "code_CH": "00",
+            "libelle": "Hellemmes",
+            "gaia_id": "d9b6595c-6667-11e3-89ff-01f464e0362d",
+            "pk": "4+096",
+            "ligne": "269000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.116260108,
+                    50.622873836
+                ]
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "id": 14326,
+            "kind": "pr",
+            "code_CI": "286864",
+            "code_CH": "00",
+            "libelle": "Ascq",
+            "gaia_id": "d98c1c22-6667-11e3-89ff-01f464e0362d",
+            "pk": "265+008",
+            "ligne": "268000"
+        },
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [
+                    3.20857113,
+                    50.680237818
+                ]
+            ]
+        }
+    }
+]
