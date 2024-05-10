@@ -1,0 +1,116 @@
+common: &common
+  name: transformer
+  type: backend
+
+cerbere:
+  common: *common
+  groups: []
+  tokens:
+    - name: lightflow_trigger_transformer
+      expire_on: 2025-01-01
+      bind_to: ptbs03221
+      roles:
+        - lightflow::POST::/run/
+        - lightflow::roles::RUN::transformer
+    - name: mlflow_transformer
+      expire_on: 2025-01-01
+      bind_to: ptbs03221
+      roles:
+        - mlflow::POST::/api/2.0/mlflow/experiments/create/
+        - mlflow::GET::/api/2.0/mlflow/experiments/get/
+        - mlflow::GET::/api/2.0/mlflow/experiments/get-by-name/
+        - mlflow::POST::/api/2.0/mlflow/experiments/update/
+        - mlflow::POST::/api/2.0/mlflow/experiments/set-experiment-tag/
+        - mlflow::POST::/api/2.0/mlflow/runs/create/
+        - mlflow::GET::/api/2.0/mlflow/runs/get/
+        - mlflow::POST::/api/2.0/mlflow/runs/log-metric/
+        - mlflow::POST::/api/2.0/mlflow/runs/log-batch/
+        - mlflow::POST::/api/2.0/mlflow/runs/log-model/
+        - mlflow::POST::/api/2.0/mlflow/runs/log-inputs/
+        - mlflow::POST::/api/2.0/mlflow/runs/set-tag/
+        - mlflow::POST::/api/2.0/mlflow/runs/log-parameter/
+        - mlflow::POST::/api/2.0/mlflow/runs/update/
+        - mlflow-artifacts::PUT::FULL_ACCESS
+        - mlflow-artifacts::GET::FULL_ACCESS
+    - name: pr_data_transformer
+      expire_on: 2025-01-01
+      bind_to: ptbs03221
+        - cassini-v2::GET::/graph/{}/pr/nodes/
+        - cassini-v2::GET::/graph/{}/pr/edges/
+        - chartis::roles::VIEW::cassini_v2
+        - chartis::GET::/v2/layer/{}/geojson/{}/
+  permissions: []
+
+lightflow:
+  common: *common
+
+  config:
+    TRANSFORMER_ENV: lightflow # variable used when executing the dag to detect the environment
+
+  default:
+    bio:
+      author: 9509543k
+      team: RE
+    shm:
+      enable: true
+
+    image:
+      name: osrdata/services/transformer
+
+  dags:
+    model_training:
+      bio:
+        description: Training the transformer model
+      metadata:
+        type: passive
+
+      pythonCommand: python3.11
+
+      resources:
+        requests:
+          cpu: 3000m
+          memory: 14Gi
+        limits:
+          cpu: 3000m
+          memory: 14Gi
+          nvidia.com/gpu: 1
+
+      nodeSelector:
+        enable: true
+        labels:
+          group: gpu-xlarge
+          topology.kubernetes.io/zone: eu-west-3a
+
+      extraVolumeMounts:
+        - name: training-data
+          mountPath: /data
+
+    hyperparameter_tuning:
+      bio:
+        description: Run multiple training (with pruning) to find the best hyperparameters
+      metadata:
+        type: passive
+
+      pythonCommand: python3.11
+
+      resources:
+        requests:
+          cpu: 3000m
+          memory: 14Gi
+        limits:
+          cpu: 3000m
+          memory: 14Gi
+          nvidia.com/gpu: 1
+
+      nodeSelector:
+        enable: true
+        labels:
+          group: gpu-xlarge
+
+      serviceAccount:
+        enable: true
+        roleArn: arn:aws:iam::541036213618:role/pdi-re-transformer-rw
+
+      extraVolumeMounts:
+        - name: training-data
+          mountPath: /data

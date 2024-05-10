@@ -1,0 +1,29 @@
+common: &common
+  realm: dev
+
+cerbere:
+  common: *common
+
+lightflow:
+  common: *common
+
+  dags:
+    model_training:
+      extraVolumes:
+        - name: training-data
+          persistentVolumeClaim:
+            claimName: transformer-dev-backend-training-data-pvc
+
+      serviceAccount:
+        enable: true
+        roleArn: arn:aws:iam::541036213618:role/pdi-re-transformer-rw-augias-ro
+
+    hyperparameter_tuning:
+      extraVolumes:
+        - name: training-data
+          persistentVolumeClaim:
+            claimName: transformer-dev-backend-training-data-pvc
+
+      serviceAccount:
+        enable: true
+        roleArn: arn:aws:iam::541036213618:role/pdi-re-transformer-rw-augias-ro

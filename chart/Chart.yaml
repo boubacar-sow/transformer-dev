@@ -1,0 +1,17 @@
+apiVersion: v2
+name: transformer
+description: A Helm chart for transformer
+type: application
+version: 0.1.0
+appVersion: 1.16.0
+
+dependencies:
+  - name: common
+    version: 1.2.0
+    repository: "@pdi"
+  - name: cerbere
+    version: 0.1.4
+    repository: "@pdi"
+  - name: lightflow
+    version: 2.3.0
+    repository: "@pdi"

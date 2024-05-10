@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ template "common.fullName" . }}-read-registry
+  namespace: {{ template "common.namespace" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  annotations:
+    {{- include "common.annotations" . | nindent 4 }}
+data:
+  .dockerconfigjson: {{ template "common.imagePullSecret" . }}
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "common.fullName" . }}-config
+  namespace: {{ template "common.namespace" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  annotations:
+    {{- include "common.annotations" . | nindent 4 }}
+data:
+  REALM: "{{ .Values.common.realm }}"
+  PROJECT_SLUG: "{{ .Values.common.name }}"
+  NAMESPACE: "{{ template "common.namespace" . }}"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ template "common.fullName" . }}-secret
+  namespace: {{ template "common.namespace" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  annotations:
+    {{- include "common.annotations" . | nindent 4 }}
+data: {}
+
+
